@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { Speaker } from '../..//entities';
+import { Speaker } from '../../../entities';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 

@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { Organizer } from '../../entities';
+import { Organizer } from '../../../entities';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 
