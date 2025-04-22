@@ -13,8 +13,11 @@ import {
   PARTICIPANTS_REPOSITORY,
   SPEAKERS_REPOSITORY,
 } from './repositories';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { Organizer, Participant, Speaker, User } from './entities';
 
 @Module({
+  imports: [TypeOrmModule.forFeature([User, Organizer, Participant, Speaker])],
   providers: [
     {
       provide: USERS_REPOSITORY,
