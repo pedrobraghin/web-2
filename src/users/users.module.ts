@@ -1,10 +1,39 @@
 import { Module } from '@nestjs/common';
-import { UsersRepository } from './users.repository';
+
 import { UsersService } from './users.service';
 import { UsersController } from './users.controller';
 
+import {
+  TyeOrmUsersRepository,
+  TyeOrmOrganizersRepository,
+  TyeOrmParticipantsRepository,
+  TyeOrmSpeakersRepository,
+  USERS_REPOSITORY,
+  ORGANIZERS_REPOSITORY,
+  PARTICIPANTS_REPOSITORY,
+  SPEAKERS_REPOSITORY,
+} from './repositories';
+
 @Module({
-  providers: [UsersRepository, UsersService],
+  providers: [
+    {
+      provide: USERS_REPOSITORY,
+      useClass: TyeOrmUsersRepository,
+    },
+    {
+      provide: ORGANIZERS_REPOSITORY,
+      useClass: TyeOrmOrganizersRepository,
+    },
+    {
+      provide: PARTICIPANTS_REPOSITORY,
+      useClass: TyeOrmParticipantsRepository,
+    },
+    {
+      provide: SPEAKERS_REPOSITORY,
+      useClass: TyeOrmSpeakersRepository,
+    },
+    UsersService,
+  ],
   controllers: [UsersController],
 })
 export class UsersModule {}
