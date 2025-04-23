@@ -1,4 +1,4 @@
-export { Organizer } from './organizer.entity';
-export { Participant } from './participant.entity';
-export { Speaker } from './speaker.entity';
-export { User } from './user.entity';
+export { OrganizerEntity } from './organizer.entity';
+export { ParticipantEntity } from './participant.entity';
+export { SpeakerEntity } from './speaker.entity';
+export { UserEntity } from './user.entity';
