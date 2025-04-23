@@ -1,4 +1,4 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { USERS_REPOSITORY, UsersRepository } from './repositories';
 import { CreateUserDto } from './dtos';
 import { UserType } from '../@types';
@@ -57,7 +57,7 @@ export class UsersService {
     const user = await this.usersRepository.findOne({ id });
 
     if (!user) {
-      throw new Error('User not found');
+      throw new NotFoundException(`User with id ${id} not found`);
     }
 
     await this.usersRepository.deleteById(id);
@@ -67,5 +67,15 @@ export class UsersService {
     const users = await this.usersRepository.findAll();
 
     return users;
+  }
+
+  async getUser(id: string) {
+    const user = await this.usersRepository.findOne({ id });
+
+    if (!user) {
+      throw new NotFoundException(`User with id ${id} not found`);
+    }
+
+    return user;
   }
 }
