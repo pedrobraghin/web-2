@@ -1,5 +1,6 @@
 import { ChildEntity } from 'typeorm';
-import { User } from './user.entity';
+import { UserEntity } from './user.entity';
+import { UserType } from 'src/@types';
 
-@ChildEntity()
-export class Organizer extends User {}
+@ChildEntity(UserType.ORGANIZER)
+export class OrganizerEntity extends UserEntity {}

@@ -1,3 +1,0 @@
-export const PARTICIPANTS_REPOSITORY = Symbol('PARTICIPANTS_REPOSITORY');
-
-export interface ParticipantsRepository {}
