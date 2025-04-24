@@ -11,7 +11,8 @@ import {
 
 import { CreateUser, FindOneUserQuery } from '../../../dtos';
 import { UsersRepository } from '../../interfaces';
-import { User } from 'src/@types';
+import { Pagination, User } from '../../../../@types';
+import { getPagination } from 'src/utils';
 
 @Injectable()
 export class TyeOrmUsersRepository implements UsersRepository {
@@ -26,8 +27,14 @@ export class TyeOrmUsersRepository implements UsersRepository {
     private readonly usersRepository: Repository<UserEntity>,
   ) {}
 
-  async findAll(): Promise<User[]> {
-    const users = await this.usersRepository.find();
+  async findAll({ limit, order, page }: Pagination): Promise<User[]> {
+    const { skip, take } = getPagination(limit, page);
+
+    const users = await this.usersRepository.find({
+      skip,
+      take,
+      order,
+    });
 
     return users;
   }

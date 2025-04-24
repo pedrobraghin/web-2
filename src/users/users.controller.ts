@@ -6,6 +6,7 @@ import {
   HttpStatus,
   Param,
   Post,
+  Query,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dtos';
@@ -17,6 +18,7 @@ import {
   ApiResponse,
   ApiTags,
 } from '@nestjs/swagger';
+import { PaginationDto } from 'src/common/pagination.dto';
 
 @ApiTags('Users')
 @Controller('users')
@@ -45,8 +47,10 @@ export class UsersController {
     status: HttpStatus.INTERNAL_SERVER_ERROR,
     description: 'Internal server error',
   })
-  async getAllUsers() {
-    return this.usersService.getAllUsers();
+  @ApiQuery({ name: 'limit', required: false, description: 'Page size' })
+  @ApiQuery({ name: 'page', required: false, description: 'Current page' })
+  async getAllUsers(@Query() pagination: PaginationDto) {
+    return this.usersService.getAllUsers(pagination);
   }
 
   @Post('participant')
@@ -65,7 +69,6 @@ export class UsersController {
   }
 
   @Post('organizer')
-  @Post('participant')
   @ApiOperation({ summary: 'Create a event organizer' })
   @ApiResponse({
     status: HttpStatus.CREATED,
@@ -81,7 +84,6 @@ export class UsersController {
   }
 
   @Post('speaker')
-  @Post('participant')
   @ApiOperation({ summary: 'Create a event speaker' })
   @ApiResponse({
     status: HttpStatus.CREATED,
@@ -108,8 +110,6 @@ export class UsersController {
     description: 'Internal server error',
   })
   @ApiParam({ name: 'id', description: 'User ID' })
-  @ApiQuery({ name: 'limit', required: false, description: 'Page size' })
-  @ApiQuery({ name: 'page', required: false, description: 'Current page' })
   async deleteUser(@Param('id') id: string) {
     return this.usersService.deleteUser(id);
   }

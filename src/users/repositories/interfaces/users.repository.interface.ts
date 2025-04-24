@@ -1,5 +1,5 @@
 import { FindOneUserQuery } from '../../dtos';
-import { User } from '../../../@types';
+import { User, Pagination } from '../../../@types';
 import { CreateUser } from '../../dtos/create-user';
 
 export const USERS_REPOSITORY = Symbol('USERS_REPOSITORY');
@@ -10,5 +10,5 @@ export interface UsersRepository {
   createParticipant: (data: CreateUser) => Promise<User>;
   findOne: (query: FindOneUserQuery) => Promise<User | null>;
   deleteById: (id: string) => Promise<User | null>;
-  findAll(): Promise<User[]>;
+  findAll(Pagination: Pagination): Promise<User[]>;
 }

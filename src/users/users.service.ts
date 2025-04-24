@@ -2,6 +2,7 @@ import { Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { USERS_REPOSITORY, UsersRepository } from './repositories';
 import { CreateUserDto } from './dtos';
 import { UserType } from '../@types';
+import { PaginationDto } from 'src/common/pagination.dto';
 
 @Injectable()
 export class UsersService {
@@ -63,8 +64,8 @@ export class UsersService {
     await this.usersRepository.deleteById(id);
   }
 
-  async getAllUsers() {
-    const users = await this.usersRepository.findAll();
+  async getAllUsers(pagination: PaginationDto) {
+    const users = await this.usersRepository.findAll(pagination);
 
     return users;
   }
