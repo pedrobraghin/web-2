@@ -1,6 +1,7 @@
 import { CanActivate } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
 import { ROLES_KEY } from './roles.decorator';
+import { User } from 'src/@types';
 
 export class RolesGuard implements CanActivate {
   constructor(private readonly reflector: Reflector) {}
@@ -15,8 +16,9 @@ export class RolesGuard implements CanActivate {
       return true;
     }
 
-    const { user } = context.switchToHttp().getRequest();
+    const request = context.switchToHttp().getRequest();
+    const user: User = request.user;
 
-    return requiredRoles.some((role) => user.roles?.includes(role));
+    return requiredRoles.some((role) => user.type === role);
   }
 }
