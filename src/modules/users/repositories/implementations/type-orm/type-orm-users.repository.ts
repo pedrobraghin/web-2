@@ -1,4 +1,4 @@
-import { OrganizerEntity } from './../../../entities/organizer.entity';
+import { OrganizerEntity } from '../../../entities/organizer.entity';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 
@@ -11,11 +11,11 @@ import {
 
 import { CreateUser, FindOneUserQuery } from '../../../dtos';
 import { UsersRepository } from '../../interfaces';
-import { Pagination, User } from '../../../../@types';
+import { Pagination, User } from '../../../../../@types';
 import { getPagination } from 'src/utils';
 
 @Injectable()
-export class TyeOrmUsersRepository implements UsersRepository {
+export class TypeOrmUsersRepository implements UsersRepository {
   constructor(
     @InjectRepository(ParticipantEntity)
     private readonly participantsRepository: Repository<ParticipantEntity>,

@@ -7,7 +7,10 @@ import {
   OrganizerEntity,
   ParticipantEntity,
   SpeakerEntity,
-} from './users/';
+  EventsModule,
+  SessionsModule,
+  EventEntity,
+} from './modules';
 
 @Module({
   imports: [
@@ -19,10 +22,18 @@ import {
       username: process.env.DB_USER,
       password: process.env.DB_PASS,
       database: process.env.DB_NAME,
-      entities: [UserEntity, OrganizerEntity, ParticipantEntity, SpeakerEntity],
+      entities: [
+        UserEntity,
+        OrganizerEntity,
+        ParticipantEntity,
+        SpeakerEntity,
+        EventEntity,
+      ],
       synchronize: process.env.development === 'development',
     }),
     UsersModule,
+    EventsModule,
+    SessionsModule,
   ],
   controllers: [],
   providers: [],

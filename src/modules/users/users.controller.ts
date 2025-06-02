@@ -99,7 +99,7 @@ export class UsersController {
   }
 
   @Delete(':id')
-  @Post('participant')
+  @Post()
   @ApiOperation({ summary: 'Delete a user' })
   @ApiResponse({
     status: HttpStatus.NO_CONTENT,

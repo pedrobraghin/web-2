@@ -1,7 +1,7 @@
 import { Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { USERS_REPOSITORY, UsersRepository } from './repositories';
 import { CreateUserDto } from './dtos';
-import { UserType } from '../@types';
+import { UserType } from '../../@types';
 import { PaginationDto } from 'src/common/pagination.dto';
 
 @Injectable()

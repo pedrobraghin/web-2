@@ -1,9 +1,9 @@
-import { Module } from '@nestjs/common';
+import { forwardRef, Module } from '@nestjs/common';
 
 import { UsersService } from './users.service';
 import { UsersController } from './users.controller';
 
-import { TyeOrmUsersRepository, USERS_REPOSITORY } from './repositories';
+import { TypeOrmUsersRepository, USERS_REPOSITORY } from './repositories';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import {
   OrganizerEntity,
@@ -24,10 +24,11 @@ import {
   providers: [
     {
       provide: USERS_REPOSITORY,
-      useClass: TyeOrmUsersRepository,
+      useClass: TypeOrmUsersRepository,
     },
     UsersService,
   ],
   controllers: [UsersController],
+  exports: [forwardRef(() => USERS_REPOSITORY)],
 })
 export class UsersModule {}
